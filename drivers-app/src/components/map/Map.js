@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Pane } from 'react-leaflet';
-import { divIcon } from "leaflet";
-
+import { divIcon } from 'leaflet';
 import _ from 'lodash';
 
 const io = require('socket.io-client');
