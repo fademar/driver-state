@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker, Tooltip } from 'react-leaflet';
+import { Map, TileLayer, Marker, Pane } from 'react-leaflet';
 import { divIcon } from "leaflet";
 
 import _ from 'lodash';
@@ -28,10 +28,10 @@ class BaseMap extends Component {
     // copy the state
     const driverscopy = [...this.state.drivers];
     
-    // search for the driver id in the state
+    // search for the driver id in the copy
     let index = _.findIndex(driverscopy, ['id', data.id]);
     
-    // update the state : add the new drivers if they are not already in the state otherwise update their position
+    // add the new drivers to the copy if they are not already in, otherwise update their position and update the state
     if (driverscopy.length === 0) {
       driverscopy.push(data);
     } else if (index === -1) {
@@ -48,7 +48,8 @@ class BaseMap extends Component {
   render() {
     
     const drivers = this.state.drivers;
-    
+    const numDrivers = drivers.length;
+
     const position = [this.state.lat, this.state.lng]
 
     return (
@@ -63,6 +64,10 @@ class BaseMap extends Component {
           let icon = divIcon({className: driver.state, html: '<i class="fa fa-car" aria-hidden="true"></i>'});
           return <Marker key={driver.id} icon={icon} position={[driver.position[0],driver.position[1]]} title={'Driver id: '+driver.id}/>;
         })}
+
+       <div className="dashboard">
+          <h1>{numDrivers} drivers on the map</h1>
+        </div>
             
       </Map>
     )

@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 const util = require('util');
 const amqplib = require('amqplib');
 const logger = require('chpr-logger');
